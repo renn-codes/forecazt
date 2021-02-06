@@ -1,0 +1,144 @@
+package com.zombieturtle.forecazt.trackers;
+
+
+public class trackConditions {
+
+    public String setMoon() {
+
+        switch (moon) {
+            // New Moon
+            case 0:
+                return "<:new_moon:529421884299804692> New Moon\n\n";
+            // Waxing Cresent
+            case 1:
+                return "<:waxing_crescent_moon:529421976482349076> Waxing Cresent\n\n";
+            // First Quarter
+            case 2:
+                return "<:first_quarter_moon:529422288836231168> First Quarter\n\n";
+            // Waxing Gibbous
+            case 3:
+                return "<:waxing_gibbous_moon:529422456096686101> Waxing Gibbous\n\n";
+            // Full Moon
+            case 4:
+                return "<:full_moon:529422530839183370> Full Moon\n\n";
+            // Waning Gibbous
+            case 5:
+                return "<:waning_gibbous_moon:529422592721944586> Waning Gibbous\n\n";
+            // Last Quarter
+            case 6:
+                return "<:last_quarter_moon:529422691682222090> Last Quarter\n\n";
+            // Waning Cresent
+            case 7:
+                return "<:waning_crescent_moon:529422909543022612> Waning Cresent\n\n";
+        }
+        return "moon machine broke...TOO BAD";
+    }
+
+    public Integer setSeason() {
+
+        if (week >= wetLo && week <= wetHi) {
+            //Wet Season
+            return 1;
+        } else if (week >= dryLo && week <= dryHi) {
+            //Dry Season
+            return 2;
+        }
+        return 0;
+    }
+
+    public Integer setHigh() {
+        double val;
+        //Wet/Dry Season
+        val = Math.floor(Math.random() * 15) + 80;
+        return (int) val;
+    }
+
+    public Integer setLow() {
+        double val;
+        //Wet/Dry Season
+        val = Math.floor(Math.random() * 15) + 65;
+        return (int) val;
+    }
+
+    //Get Wind speeds
+    public Integer setWind() {
+        double val;
+        val = Math.floor(Math.random() * 10) + 1;
+        return (int) val;
+    }
+
+    public String setWeather() {
+        //Weather types: 1 (Normal) 60%, 2 (Occurance) 40%
+        //Occurance Types: 1 (Inclement) 70%, 2 (Storm) 15%, 3 (Powerful Storm) 10%, 4 (BAD) 5%
+
+        //Normal weather
+        if (Math.floor(Math.random() * 100) + 1 <= 60) {
+            string = string + "**Weather Description:** Normal weather\n";
+        }
+        //Occurance
+        else {
+            double percentage = Math.floor(Math.random() * 100) + 1;
+            //Inclement
+            if (percentage <= 97) {
+
+                //Check for type by season
+                percentage = Math.floor(Math.random() * 100) + 1;
+                //Wet Season
+                if (season == 1 || season == 2) {
+                    //Rain
+                    if (percentage <= 60) {
+                        string = string + "**Weather Description:** Inclement weather\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 20) + 1) + " hour(s) of rain\n";
+                    }
+                    //Fog
+                    else if (percentage >= 61 && percentage <= 70) {
+                        string = string + "**Weather Description:** Inclement weather\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 10) + 1) + " hour(s) of fog\n";
+                    }
+                    //Storm
+                    else if (percentage >= 71 && percentage <= 86) {
+                        wind = wind + 5;
+                        string = string + "**Weather Description:** Storms\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 15) + 1) + " hour(s) of thunderstorms and rain\n";
+                    }
+                    //Powerful Storm
+                    else if (percentage >= 87 && percentage <= 100) {
+                        wind = wind + 8;
+                        string = string + "**Weather Description:** Powerful Storms\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 15) + 1) + " hour(s) of heavy thunderstorms and rain\n";
+                    }
+                }
+                //Dry Season
+                else if (season == 3 || season == 4) {
+                    //Rain
+                    if (percentage <= 60) {
+                        string = string + "**Weather Description:** Inclement weather\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 3) + 1) + " hour(s) of rain\n";
+                    }
+                    //Fog
+                    else if (percentage >= 61 && percentage <= 79) {
+                        string = string + "**Weather Description:** Inclement weather\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 2) + 1) + " hour(s) of fog\n";
+                    }
+                    //Storm
+                    else if (percentage >= 80 && percentage <= 100) {
+                        wind = wind + 5;
+                        string = string + "**Weather Description:** Storms\n";
+                        string2 = string2 + "**Precipitation:** " + (Math.floor(Math.random() * 8) + 1) + " hour(s) of thunderstorms and rain\n";
+                    }
+                }
+            }
+            //BAD
+            else if (percentage >= 98 && percentage <= 100 && bad == 0) {
+                string = string + "**Weather Description:** Natural Disaster\n";
+                bad == 1;
+                getBAD();
+            }
+            //BAD already triggered
+            else if (percentage >= 98 && percentage <= 100 && bad == 1) {
+                string = string + "**Weather Description:** Normal weather\n";
+            }
+        }
+        return "weather machine broke...SHIT";
+    }
+}
