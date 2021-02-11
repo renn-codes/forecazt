@@ -137,7 +137,7 @@ public class dataUpdater {
             }
         }
         double kph = Math.round((mph*1.6));
-        dataHolder.setWindKph((int) kph);
+        //dataHolder.setWindKph((int) kph);
     }
 
     private static void genBadStuff() {

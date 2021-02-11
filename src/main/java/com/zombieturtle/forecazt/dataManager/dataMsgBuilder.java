@@ -2,31 +2,30 @@ package com.zombieturtle.forecazt.dataManager;
 
 import static com.zombieturtle.forecazt.dataManager.dataNaturalStrings.*;
 import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
-import static com.zombieturtle.forecazt.dataManager.beaufortScale.beaufortScale.*;
-import com.zombieturtle.forecazt.ForecaZT.*;
+import static com.zombieturtle.forecazt.ForecaZT.nl;
 
 import javax.xml.bind.JAXBException;
 
 public class dataMsgBuilder {
 
-    private static String[] msgHolder;
 
-    private static String ZTScale(Integer wind) {
 
-        String scale = "[ERROR: Negative wind speed]";
+    private static Integer ZTScale(Integer wind) {
+
+        Integer scale = 0;
 
         if(wind > 0 && wind < 10) {
-            scale = bZT1;
+            scale = 1;
         } else if(wind > 11 && wind < 25) {
-            scale = bZT2;
+            scale = 2;
         } else if(wind > 26 && wind < 37) {
-            scale = bZT3;
+            scale = 3;
         } else if(wind > 38 && wind < 45) {
-            scale = bZT4;
+            scale = 4;
         } else if(wind > 46 && wind < 65) {
-            scale = bZT5;
+            scale = 5;
         } else if(wind > 66) {
-            scale = bZT6;
+            scale = 6;
         }
 
         return scale;
@@ -34,21 +33,21 @@ public class dataMsgBuilder {
 
     private static String msgBuilder(Integer today) throws JAXBException {
         dataDay dataHolder = loadDay(today);
-        String msg;
-
-        msgHolder[0] = getColonyList(dataHolder.getColony());
+        String message;
+        message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl;
+        StringBuilder msgHolder = new StringBuilder(message);
 
         if(dataHolder.getBad()) {
-            msgHolder[1] = getBadStuff(dataHolder.getWeather());
+            msgHolder.append(getBadStuff(dataHolder.getWeather()));
         } else if(!dataHolder.getBad()) {
-            msgHolder[1] = getWeather(dataHolder.getWeather());
+            msgHolder.append(getWeather(dataHolder.getWeather()));
         }
-
-        msgHolder[2] = ZTScale(dataHolder.getWindMph());
-        msg = msgHolder[0] + msgHolder[1] + msgHolder[2];
-        return msg;
+        msgHolder.toString().replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())));
+        msgHolder.toString().replace("%TMP", dataHolder.getHigh().toString());
+        return msgHolder.toString();
     }
 
     public void msgSender(int startDay) {
+
     }
 }
