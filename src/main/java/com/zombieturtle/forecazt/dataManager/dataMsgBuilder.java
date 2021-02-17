@@ -46,8 +46,8 @@ public class dataMsgBuilder {
         } else if(!dataHolder.getBad()) {
             message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + getWeather(dataHolder.getWeather());
         }
-        message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())))
-            .replace("%TMP", dataHolder.getHigh().toString());
+        message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())));
+        message = message.replace("%TMP", dataHolder.getHigh().toString());
         return message;
     }
 
