@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     compile 'net.dv8tion:JDA:4.2.0_222'
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
 }
 
 apply plugin: 'java'
