@@ -72,9 +72,9 @@ public class dataNaturalStrings {
         return badStuff[index];
     }
 
-    public static String getColonyList(Integer index) {
-        return colonyList[index];
-    }
+    public static String getColonyList(Integer index) { return colonyList[index]; }
+
+    public static String getNaturalTemps(Integer index) { return naturalTemps[index]; }
 
     public static String getBeaufortScale(Integer index) { return beaufortScale[index]; }
 }

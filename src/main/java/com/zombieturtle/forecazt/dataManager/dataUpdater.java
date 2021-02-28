@@ -29,6 +29,7 @@ public class dataUpdater {
             Integer ww = w + 1;
             genSeason(ww);
             genWeather();
+            genNatTemp();
             dataHolder.setRuntime(ww);
             dataHolder.setDate(d);
             saveDay(dataHolder, ww);
@@ -57,8 +58,11 @@ public class dataUpdater {
         while(low == high) {
             low = Math.floor(Math.random() * 15) + 65;
         }
+
+        double average = (high + low) / 2;
         dataHolder.setHigh((int) high);
         dataHolder.setLow((int) low);
+        dataHolder.setTemp((int) average);
 
         //Weather types: [5] (Normal) 60%, [+] (Occurrence) 40%
         //Occurrence Types: [1 & 2] (Inclement) 70%, [3] (Storm) 15%, [4] (Powerful Storm) 10%, [set later] (BAD) 5%
@@ -169,27 +173,50 @@ public class dataUpdater {
         //Dry Season
         if(dataHolder.getSeason() == 2) {
             //Megafauna
-            if(percentage >= 1 && percentage <= 30) {
+            if (percentage >= 1 && percentage <= 30) {
                 dataHolder.setWeather(1);
             }
             //Earthquake
-            if(percentage >= 31 && percentage <= 50) {
+            if (percentage >= 31 && percentage <= 50) {
                 dataHolder.setWeather(2);
             }
             //Record Heat
-            if(percentage >= 51 && percentage <= 80) {
+            if (percentage >= 51 && percentage <= 80) {
                 double high = dataHolder.getHigh() + 15;
                 double low = dataHolder.getLow() + 15;
+                double average = (high + low) / 2;
                 dataHolder.setHigh((int) high);
                 dataHolder.setLow((int) low);
+                dataHolder.setTemp((int) average);
                 dataHolder.setWeather(5);
             }
             //Tornado
-            if(percentage >= 81) {
-                double mph = dataHolder.getWindMph() +  Math.floor(Math.random() * 60) + 70;
+            if (percentage >= 81) {
+                double mph = dataHolder.getWindMph() + Math.floor(Math.random() * 60) + 70;
                 dataHolder.setWindMph((int) mph);
                 dataHolder.setWeather(4);
             }
+        }
+    }
+
+    private static void genNatTemp() {
+        if (dataHolder.getTemp() <= 0) {
+            dataHolder.setNatTemp(0);
+        }
+        if (dataHolder.getTemp() >= 1 && dataHolder.getTemp() <= 35) {
+            dataHolder.setNatTemp(1);
+        }
+        if (dataHolder.getTemp() >= 36 && dataHolder.getTemp() <= 55) {
+            dataHolder.setNatTemp(2);
+        }
+        if (dataHolder.getTemp() >= 56 && dataHolder.getTemp() <= 70) {
+            dataHolder.setNatTemp(3);
+        }
+        if (dataHolder.getTemp() >= 71 && dataHolder.getTemp() <= 99) {
+            dataHolder.setNatTemp(4);
+        }
+        if (dataHolder.getTemp() >= 100) {
+            dataHolder.setNatTemp(5);
         }
     }
 }

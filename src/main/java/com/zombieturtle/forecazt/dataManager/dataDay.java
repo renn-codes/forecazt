@@ -5,11 +5,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "week")
-@XmlType(propOrder = { "runtime", "date", "high", "low", "windmph", /*"windkph", "moon",*/ "season", "weather", "bad", "colony" })
+@XmlType(propOrder = { "runtime", "date", "temp", "high", "low", "windmph", /*"windkph", "moon",*/ "season", "weather", "nattemp", "bad", "colony" })
 public class dataDay {
 
     private Integer runtime;
     private String date;
+    private Integer temp;
     private Integer high;
     private Integer low;
     private Integer windmph;
@@ -17,6 +18,7 @@ public class dataDay {
     // private Integer moon; Deprecated, remove later?
     private Integer season;
     private Integer weather;
+    private Integer nattemp;
     private Boolean bad;
     private Integer colony;
 
@@ -36,6 +38,15 @@ public class dataDay {
     @XmlElement
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Integer getTemp() {
+        return temp;
+    }
+
+    @XmlElement
+    public void setTemp(Integer temp) {
+        this.temp = temp;
     }
 
     public Integer getHigh() {
@@ -103,6 +114,15 @@ public class dataDay {
     @XmlElement
     public void setWeather(Integer weathera) {
         this.weather = weathera;
+    }
+
+    public Integer getNatTemp() {
+        return nattemp;
+    }
+
+    @XmlElement
+    public void setNatTemp(Integer nattemp) {
+        this.nattemp = nattemp;
     }
 
     public Boolean getBad() {

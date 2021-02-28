@@ -1,14 +1,9 @@
 package com.zombieturtle.forecazt.dataManager;
 
-import com.zombieturtle.forecazt.ForecaZT;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.TextChannel;
-
 import static com.zombieturtle.forecazt.dataManager.dataNaturalStrings.*;
 import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
 import static com.zombieturtle.forecazt.ForecaZT.nl;
-import static com.zombieturtle.forecazt.ForecaZT.jda;
+import static com.zombieturtle.forecazt.ForecaZT.*;
 
 import javax.xml.bind.JAXBException;
 
@@ -37,29 +32,19 @@ public class dataMsgBuilder {
         return scale;
     }
 
-    private static String msgBuilder(Integer today) throws JAXBException {
-        dataDay dataHolder = loadDay(today);
+    public static String msgBuilder() throws JAXBException {
+        dataDay dataHolder = loadDay(currentTime);
+
         String message = "%WND %TMP";
 
         if(dataHolder.getBad()) {
-            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + getBadStuff(dataHolder.getWeather());
+            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + nl + getBadStuff(dataHolder.getWeather());
         } else if(!dataHolder.getBad()) {
-            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + getWeather(dataHolder.getWeather());
+            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + nl + getWeather(dataHolder.getWeather());
         }
         message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())));
-        message = message.replace("%TMP", dataHolder.getHigh().toString());
+        message = message.replace("%TMP", dataHolder.getTemp().toString());
         return message;
     }
 
-    public void msgSender(int startDay, String chnl) throws JAXBException, NullPointerException {
-
-        TextChannel txtChannel = jda.getTextChannelById(chnl);
-
-        //assert txtChannel != null;
-        if (txtChannel.canTalk()) {
-            txtChannel.sendMessage(msgBuilder(startDay)).queue();
-        } else {
-            System.out.println("[ERROR] Cannot talk here!");
-        }
-    }
 }

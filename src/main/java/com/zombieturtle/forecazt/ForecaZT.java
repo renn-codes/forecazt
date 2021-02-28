@@ -3,13 +3,15 @@ package com.zombieturtle.forecazt;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 
-import static com.zombieturtle.forecazt.MessageScheduler.*;
-import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
+import static com.zombieturtle.forecazt.quartz.MessageScheduler.*;
+import static com.zombieturtle.forecazt.quartz.jobPostWeek.*;
 import com.zombieturtle.forecazt.dataManager.dataDay;
 import org.quartz.SchedulerException;
 
@@ -28,13 +30,15 @@ public class ForecaZT extends ListenerAdapter {
     public static String botToken;
     public static String botControl;
     public static Integer startTime; // the 0-based time the bot is starting at, passed in via args[3]
+    public static Integer currentTime;
+    public static Integer hour, minute, second;
 
     public static ArrayList<dataDay> thisWeek = new ArrayList<dataDay>();
 
     public static JDA jda;
 
     public static void main(String[] args)
-            throws LoginException, JAXBException {
+            throws LoginException, SchedulerException {
         if (args.length < 4) {
             System.out.println("You have to provide the [Token] [WeatherChannel] [ControlChannel] [StartTime]");
             System.exit(1);
@@ -43,7 +47,12 @@ public class ForecaZT extends ListenerAdapter {
         botWeather = args[1];
         // botCalendar = args[2]; Deprecated, likely removing
         botControl = args[2];
-        startTime = Integer.parseInt(args[4]);
+        startTime = Integer.parseInt(args[3]);
+        currentTime = startTime;
+
+        hour = Integer.parseInt(args[4]);
+        minute = Integer.parseInt(args[5]);
+        second = Integer.parseInt(args[6]);
 
         // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
@@ -53,6 +62,8 @@ public class ForecaZT extends ListenerAdapter {
                 .setActivity(Activity.playing("Starfinder"))
                 .build();
 
+        test(hour, minute, second);
+        /*
         if (startTime > 0 && startTime < 7) {
             System.out.println("IT#0005");// IT#0005
         } else if (startTime >= 7) {
@@ -62,7 +73,8 @@ public class ForecaZT extends ListenerAdapter {
             }
         } else if (startTime == 0) {
             thisWeek.add(loadDay(0));
-        }
+
+        */
     }
 
     private void shutdown(boolean now) throws SchedulerException, InterruptedException {
@@ -80,5 +92,28 @@ public class ForecaZT extends ListenerAdapter {
         }
     }
 
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        Message msg = event.getMessage();
+        MessageChannel channel = event.getChannel();
+        if (botControl.compareTo(channel.getName()) == 0) {
+            switch (msg.getContentRaw()) {
+                case "!dismiss":
+                    try {
+                        shutdown(false);
+                    } catch (SchedulerException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "!dismiss now":
+                    try {
+                        shutdown(true);
+                    } catch (SchedulerException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    }
 }
 
