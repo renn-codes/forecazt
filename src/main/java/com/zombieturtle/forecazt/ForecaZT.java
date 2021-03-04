@@ -3,6 +3,7 @@ package com.zombieturtle.forecazt;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -18,6 +19,7 @@ import org.quartz.SchedulerException;
 import javax.security.auth.login.LoginException;
 import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ForecaZT extends ListenerAdapter {
 
@@ -38,7 +40,7 @@ public class ForecaZT extends ListenerAdapter {
     public static JDA jda;
 
     public static void main(String[] args)
-            throws LoginException, SchedulerException {
+            throws LoginException, SchedulerException, InterruptedException {
         if (args.length < 4) {
             System.out.println("You have to provide the [Token] [WeatherChannel] [ControlChannel] [StartTime]");
             System.exit(1);
@@ -60,9 +62,13 @@ public class ForecaZT extends ListenerAdapter {
         jda = JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
                 .addEventListeners(new ForecaZT())
                 .setActivity(Activity.playing("Starfinder"))
-                .build();
+                .build()
+                .awaitReady();
 
         test(hour, minute, second);
+        MessageChannel channel = jda.getTextChannelsByName(botWeather, true).get(0);
+
+        channel.sendMessage("Test").queue();
         /*
         if (startTime > 0 && startTime < 7) {
             System.out.println("IT#0005");// IT#0005

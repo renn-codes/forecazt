@@ -16,7 +16,7 @@ public class MessageScheduler {
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1")
                 .withIdentity("myTrigger", "group1")
                 .startAt(DateBuilder.todayAt(hour, minute, second))
-                .withSchedule(CronScheduleBuilder.cronSchedule("2/2 * * * *"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 1 * * * ?"))
                 .build();
 
         scheduler.scheduleJob(jobDetail, trigger);
