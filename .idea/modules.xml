@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/forecazt.iml" filepath="$PROJECT_DIR$/.idea/forecazt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forecazt.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/forecazt.main~1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/forecazt.test.iml" filepath="$PROJECT_DIR$/.idea/modules/forecazt.test.iml" />
     </modules>
   </component>
 </project>
