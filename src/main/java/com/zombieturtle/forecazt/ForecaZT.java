@@ -42,7 +42,7 @@ public class ForecaZT extends ListenerAdapter {
     public static void main(String[] args)
             throws LoginException, SchedulerException, InterruptedException {
         if (args.length < 4) {
-            System.out.println("You have to provide the [Token] [WeatherChannel] [ControlChannel] [StartTime]");
+            System.out.println("You have to provide the [Token] [WeatherChannelId] [ControlChannelId] [StartTime]");
             System.exit(1);
         }
         botToken = args[0];
@@ -66,7 +66,7 @@ public class ForecaZT extends ListenerAdapter {
                 .awaitReady();
 
         test(hour, minute, second);
-        MessageChannel channel = jda.getTextChannelsByName(botWeather, true).get(0);
+        MessageChannel channel = jda.getTextChannelById(botWeather); //jda.getTextChannelsByName(botWeather, true).get(0);
 
         channel.sendMessage("Test").queue();
         /*

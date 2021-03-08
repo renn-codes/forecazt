@@ -13,8 +13,8 @@ import static com.zombieturtle.forecazt.dataManager.dataMsgBuilder.*;
 public class jobPostWeek implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        MessageChannel control = jda.getTextChannelsByName(botControl, true).get(0);
-        MessageChannel channel = jda.getTextChannelsByName(botWeather, true).get(0);
+        MessageChannel control = jda.getTextChannelById(botControl);
+        MessageChannel channel = jda.getTextChannelById(botWeather);
         try {
             channel.sendMessage(msgBuilder()).queue();
         } catch (JAXBException e) {
