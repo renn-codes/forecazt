@@ -6,6 +6,10 @@ repositories {
     jcenter()
 }
 
+application {
+    mainClass = 'com.zombieturtle.forecazt.ForecaZT'
+}
+
 dependencies {
     compile 'net.dv8tion:JDA:4.2.0_235'
     compile 'org.quartz-scheduler:quartz:2.3.1'

@@ -1,4 +1,4 @@
-package com.zombieturtle.forecazt.quartz;
+package com.zombieturtle.forecazt;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.quartz.Job;
@@ -11,15 +11,19 @@ import static com.zombieturtle.forecazt.ForecaZT.*;
 import static com.zombieturtle.forecazt.dataManager.dataMsgBuilder.*;
 
 public class jobPostWeek implements Job {
-    @Override
+
     public void execute(JobExecutionContext context) throws JobExecutionException {
         MessageChannel control = jda.getTextChannelById(botControl);
         MessageChannel channel = jda.getTextChannelById(botWeather);
+
+        /*
         try {
             channel.sendMessage(msgBuilder()).queue();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        control.sendMessage("Weather report fired at " + context.getJobRunTime() + ", next runtime is " + context.getScheduledFireTime()).queue();
+        */
+        channel.sendMessage("weather");
+        control.sendMessage("Weather report fired at " + context.getFireTime() + ", next runtime is " + context.getScheduledFireTime()).queue();
     }
 }

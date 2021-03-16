@@ -3,7 +3,6 @@ package com.zombieturtle.forecazt;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.GuildChannel;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -11,15 +10,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 
-import static com.zombieturtle.forecazt.quartz.MessageScheduler.*;
-import static com.zombieturtle.forecazt.quartz.jobPostWeek.*;
 import com.zombieturtle.forecazt.dataManager.dataDay;
-import org.quartz.SchedulerException;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 
 import javax.security.auth.login.LoginException;
-import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class ForecaZT extends ListenerAdapter {
 
@@ -38,9 +35,12 @@ public class ForecaZT extends ListenerAdapter {
     public static ArrayList<dataDay> thisWeek = new ArrayList<dataDay>();
 
     public static JDA jda;
+    public static Scheduler scheduler;
+
 
     public static void main(String[] args)
             throws LoginException, SchedulerException, InterruptedException {
+
         if (args.length < 4) {
             System.out.println("You have to provide the [Token] [WeatherChannelId] [ControlChannelId] [StartTime]");
             System.exit(1);
@@ -65,11 +65,27 @@ public class ForecaZT extends ListenerAdapter {
                 .build()
                 .awaitReady();
 
-        test(hour, minute, second);
+        Date startTime = DateBuilder.todayAt(hour, minute, second);
+
+        StdSchedulerFactory factory = new StdSchedulerFactory();
+        Scheduler scheduler = factory.getScheduler();
+
+        JobDetail jobDetail = JobBuilder.newJob(jobPostWeek.class).withIdentity("jobPostWeek", "group1").build();
+
+        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1")
+                .startAt(startTime)
+                .withSchedule(CronScheduleBuilder.cronSchedule("* 1 * * * ?"))
+                .build();
+
+        scheduler.scheduleJob(jobDetail, trigger);
+
+        scheduler.start();
+
+        //test(hour, minute, second);
         MessageChannel channel = jda.getTextChannelById(botWeather); //jda.getTextChannelsByName(botWeather, true).get(0);
 
-        channel.sendMessage("Test").queue();
-        /*
+        channel.sendMessage("first fire at: " + startTime.toString());
+                /*
         if (startTime > 0 && startTime < 7) {
             System.out.println("IT#0005");// IT#0005
         } else if (startTime >= 7) {
