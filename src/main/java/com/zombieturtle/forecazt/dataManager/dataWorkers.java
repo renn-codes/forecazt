@@ -5,6 +5,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -23,13 +25,13 @@ public class dataWorkers {
         return data;
     }
 
-    public static void saveDay(dataDay data, Integer runtime) throws JAXBException {
+    public static void saveDay(dataDay data, Integer runtime) throws JAXBException, FileNotFoundException {
         String filename = "FZTDATA-" + runtime + ".xml";
-        File file = new File(filename);
+        // File file = new File(filename);
         JAXBContext context = JAXBContext.newInstance(dataDay.class);
         Marshaller mar= context.createMarshaller();
         mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        mar.marshal(data, file);
+        mar.marshal(data, new FileOutputStream(filename));
     }
 
     public static Integer getSysTime() {

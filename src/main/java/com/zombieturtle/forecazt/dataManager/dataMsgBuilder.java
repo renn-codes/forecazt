@@ -9,8 +9,6 @@ import javax.xml.bind.JAXBException;
 
 public class dataMsgBuilder {
 
-
-
     private static Integer ZTScale(Integer wind) {
 
         Integer scale = 0;
@@ -32,18 +30,20 @@ public class dataMsgBuilder {
         return scale;
     }
 
-    public static String msgBuilder() throws JAXBException {
-        dataDay dataHolder = loadDay(currentTime);
+    public static String msgBuilder(Integer current) throws JAXBException {
+        dataDay dataHolder = loadDay(current);
 
         String message = "%WND %TMP";
 
+
+
         if(dataHolder.getBad()) {
-            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + nl + getBadStuff(dataHolder.getWeather());
+            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + getBadStuff(dataHolder.getWeather());
         } else if(!dataHolder.getBad()) {
-            message = "Here's today's weather for " + getColonyList(dataHolder.getColony()) + ":" + nl + nl + getWeather(dataHolder.getWeather());
+            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + getWeather(dataHolder.getWeather());
         }
         message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())));
-        message = message.replace("%TMP", dataHolder.getTemp().toString());
+        message = message.replace("%TMP", getNaturalTemps(dataHolder.getNatTemp()));
         return message;
     }
 

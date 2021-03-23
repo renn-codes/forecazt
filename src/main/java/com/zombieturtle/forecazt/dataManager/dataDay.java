@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "week")
-@XmlType(propOrder = { "runtime", "date", "temp", "high", "low", "windmph", /*"windkph", "moon",*/ "season", "weather", "nattemp", "bad", "colony" })
+@XmlType(propOrder = { "runtime", "date", "temp", "high", "low", "windMph", "season", "weather", "natTemp", "bad", "colony" })
 public class dataDay {
 
     private Integer runtime;
@@ -14,8 +14,6 @@ public class dataDay {
     private Integer high;
     private Integer low;
     private Integer windmph;
-    // private Integer windkph; Unused, remove later?
-    // private Integer moon; Deprecated, remove later?
     private Integer season;
     private Integer weather;
     private Integer nattemp;
@@ -75,28 +73,6 @@ public class dataDay {
     public void setWindMph(Integer windmph) {
         this.windmph = windmph;
     }
-
-    /* Unused, remove later?
-    public Integer getWindKph() {
-        return windkph;
-    }
-
-    @XmlElement
-    public void setWindKph(Integer windkph) {
-        this.windkph = windkph;
-    }
-*/
-
-    /* Deprecated, remove later?
-    public Integer getMoon() {
-        return moon;
-    }
-
-    @XmlElement
-    public void setMoon(Integer moon) {
-        this.moon = moon;
-    }
-    */
 
     public Integer getSeason() {
         return season;

@@ -2,37 +2,44 @@ package com.zombieturtle.forecazt.dataManager;
 
 import javax.xml.bind.JAXBException;
 
+import java.io.FileNotFoundException;
+
 import static com.zombieturtle.forecazt.ForecaZT.*;
 import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
 
 public class dataUpdater {
 
     private static dataDay dataHolder = new dataDay();
-    private static String[] weekOut;
 
     private static Integer w;
-    private static String d;
-    private static Boolean bad;
+    private static Boolean bad = false;
 
-    public static void updateData() throws JAXBException {
+    public static void updateData() throws JAXBException, FileNotFoundException {
         if (startTime == 0) {
-            generateWeek();
+            generateWeek(true);
+        } else if(startTime >= 1) {
+            generateWeek(false);
         }
     }
 
-    private static void generateWeek() throws JAXBException {
-        w = thisWeek.get(0).getRuntime(); // get prev week/runtime
-        d = getSysDate(); //get today's date
+    private static void generateWeek(boolean firstRun) throws JAXBException, FileNotFoundException {
+        if(!firstRun) {
+            w = currentTime + 1; // get prev week/runtime
+        } else if(firstRun) {
+            w = 0;
+        }
+        String d = getSysDate(); //get today's date
 
         // Generate Weather per dayweek
         for (int i = 1; i <= 7; i++) {
-            Integer ww = w + 1;
-            genSeason(ww);
+            dataHolder.setColony(0);
+            genSeason(w);
             genWeather();
             genNatTemp();
-            dataHolder.setRuntime(ww);
+            dataHolder.setRuntime(w);
             dataHolder.setDate(d);
-            saveDay(dataHolder, ww);
+            saveDay(dataHolder, w);
+            w = w + 1;
         }
     }
 
@@ -47,14 +54,14 @@ public class dataUpdater {
 
     private static void genWeather() {
         // Generate our wind speed
-        double mph = Math.floor(Math.random() * 10) + 1;
-
+        double mph = Math.floor(Math.floor(Math.random() * 37) + 1);
+        dataHolder.setWindMph((int) mph);
         // Generate and commit our temperatures
         //Get high
-        double high = Math.floor(Math.random() * 15)+80;
+        double high = Math.floor(Math.random() * 15) + 80;
 
         //Get Low
-        double low = Math.floor(Math.random() * 15)+65;
+        double low = Math.floor(Math.random() * 15) + 65;
         while(low == high) {
             low = Math.floor(Math.random() * 15) + 65;
         }
@@ -69,7 +76,7 @@ public class dataUpdater {
 
         //Normal weather
         if (Math.floor(Math.random() * 100) + 1 <= 60) {
-            dataHolder.setWeather(5);
+            dataHolder.setWeather(0);
             dataHolder.setBad(false);
         }
         //Occurrence
@@ -135,12 +142,12 @@ public class dataUpdater {
             }
             //BAD already triggered
             else if (percentage >= 98 && percentage <= 100 && bad) {
-                dataHolder.setWeather(5);
+                dataHolder.setWeather(0);
                 bad = false;
                 dataHolder.setBad(false);
             }
         }
-        double kph = Math.round((mph*1.6));
+        //double kph = Math.round((mph*1.6));
         //dataHolder.setWindKph((int) kph);
     }
 
@@ -153,32 +160,32 @@ public class dataUpdater {
         if(dataHolder.getSeason() == 1) {
             //Megafauna
             if(percentage >= 1 && percentage <= 30) {
-                dataHolder.setWeather(1);
+                dataHolder.setWeather(0);
             }
             //Earthquake
             if(percentage >= 31 && percentage <= 50) {
-                dataHolder.setWeather(2);
+                dataHolder.setWeather(1);
             }
             //Torrential Rains
             if(percentage >= 51 && percentage <= 80) {
-                dataHolder.setWeather(3);
+                dataHolder.setWeather(2);
             }
             //Tornado
             if(percentage >= 81) {
                 double mph = dataHolder.getWindMph() + Math.floor(Math.random() * 60) + 70;
                 dataHolder.setWindMph((int) mph);
-                dataHolder.setWeather(4);
+                dataHolder.setWeather(3);
             }
         }
         //Dry Season
         if(dataHolder.getSeason() == 2) {
             //Megafauna
             if (percentage >= 1 && percentage <= 30) {
-                dataHolder.setWeather(1);
+                dataHolder.setWeather(0);
             }
             //Earthquake
             if (percentage >= 31 && percentage <= 50) {
-                dataHolder.setWeather(2);
+                dataHolder.setWeather(1);
             }
             //Record Heat
             if (percentage >= 51 && percentage <= 80) {
@@ -188,13 +195,13 @@ public class dataUpdater {
                 dataHolder.setHigh((int) high);
                 dataHolder.setLow((int) low);
                 dataHolder.setTemp((int) average);
-                dataHolder.setWeather(5);
+                dataHolder.setWeather(4);
             }
             //Tornado
             if (percentage >= 81) {
                 double mph = dataHolder.getWindMph() + Math.floor(Math.random() * 60) + 70;
                 dataHolder.setWindMph((int) mph);
-                dataHolder.setWeather(4);
+                dataHolder.setWeather(3);
             }
         }
     }
