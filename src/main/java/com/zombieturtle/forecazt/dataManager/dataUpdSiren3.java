@@ -1,13 +1,20 @@
 package com.zombieturtle.forecazt.dataManager;
 
+import net.dv8tion.jda.api.entities.MessageChannel;
+
 import javax.xml.bind.JAXBException;
 
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import static com.zombieturtle.forecazt.ForecaZT.*;
 import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
+import static com.zombieturtle.forecazt.dataManager.dataMsgBuilder.*;
 
-public class dataUpdater {
+public class dataUpdSiren3 {
 
     private static dataDay dataHolder = new dataDay();
 
@@ -15,22 +22,27 @@ public class dataUpdater {
     private static Boolean bad = false;
 
     public static void updateData() throws JAXBException, FileNotFoundException {
+        MessageChannel control = jda.getTextChannelById(botControl);
         if (startTime == 0) {
             generateWeek(true);
         } else if(startTime >= 1) {
             generateWeek(false);
         }
+        Integer begin = currentTime + 1;
+        Integer end = currentTime + 7;
+        control.sendMessage("Dayweek XML generation completed for weeks " + begin.toString() + " though " + end.toString());
     }
 
     private static void generateWeek(boolean firstRun) throws JAXBException, FileNotFoundException {
         if(!firstRun) {
-            w = currentTime + 1; // get prev week/runtime
+            w = currentTime + 1; // get prev dayweek/runtime
         } else if(firstRun) {
             w = 0;
         }
         String d = getSysDate(); //get today's date
-
-        // Generate Weather per dayweek
+        MessageChannel gm = jda.getTextChannelById(botGM);
+        // Generate Weather per dayweek"
+        gm.sendMessage("Weekly weather preview" + nl + "---");
         for (int i = 1; i <= 7; i++) {
             dataHolder.setColony(0);
             genSeason(w);
@@ -39,6 +51,10 @@ public class dataUpdater {
             dataHolder.setRuntime(w);
             dataHolder.setDate(d);
             saveDay(dataHolder, w);
+            Calendar cal = Calendar.getInstance();
+            Date day = cal.getTime();
+            gm.sendMessage("**" + new SimpleDateFormat("M d yyyy", Locale.ENGLISH).format(day.getTime()) + "**" + nl + "---");
+            gm.sendMessage(msgBuilder(w));
             w = w + 1;
         }
     }

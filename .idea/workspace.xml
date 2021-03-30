@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed.">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdNewColony.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/jobGenWeek.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/LootTurtle.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/LootTurtle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataDay.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataDay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataStrings.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataStrings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataWorkers.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/dataManager/dataWorkers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/beaufortScale/beaufortScale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataDay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataNaturalStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataNaturalStrings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataWorkers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataWorkers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/jobPostWeek.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/jobPostWeek.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,13 +54,27 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="0.1-testing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -81,7 +85,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1pXuXMGfKyWteCbwmYOC7vNLUnV" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -139,6 +145,14 @@
       <option name="presentableId" value="Default" />
       <updated>1615341795906</updated>
     </task>
+    <task id="LOCAL-00001" summary="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed.">
+      <created>1616464012078</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616464012078</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

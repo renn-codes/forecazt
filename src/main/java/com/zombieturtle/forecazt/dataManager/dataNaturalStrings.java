@@ -5,34 +5,19 @@ import static com.zombieturtle.forecazt.ForecaZT.nl;
 public class dataNaturalStrings {
 
     private static final String[] naturalWeather = {
-            /*{
-                    "** Inclement weather **" + nl + nl,
-                    "** Inclement weather **" + nl + nl,
-                    "** Storms **" + nl + nl,
-                    "** Powerful Storms **" + nl + nl,
-                    "** Normal weather **" + nl + nl,
-                    "** Natural Disaster **" + nl + nl
-            },*/
-            // {
                     "It's a %TMP and clear, sunny week, %WND. It's perfect for exploration, research, and other adventurous exploits. ",
                     "It's a %TMP and rainy week, %WND. There will be light rains scattered around the colony and surrounding areas. ",
                     "It's a %TMP and quite foggy week, %WND. There will be patchy fog throughout the week as a whole. ",
                     "It's a %TMP and stormy week, %WND. There will be high chances of light-to-moderate thunderstorms at and around the colony. ",
                     "It's a %TMP and quite stormy week, %WND. There is the strong possibility of many quite powerful thunderstorms rocking the area. ",
-            // }
     };
 
     private static final String[] badStuff = {
-            // {
                     "It's a %TMP and clear week, %WND. There has been a **Megafauna** sighting near the colony. @Colonists, take caution and report any further sightings. ",
                     "It's a %TMP and clear week, %WND. An **Earthquake** has rocked the area. Make sure to check for any damage to and the integrity of buildings and other structures in the colony. ",
                     "It's a %TMP and wet week, %WND. **Torrential Rains** sweep and batter the colony. @Colonists, take caution for small lakes and deep puddles! ",
                     "It's a %TMP and cloudy week, %WND. A **Tornado** has been sighted and has touched down in the colony. @Colonists, be sure to check and repair any damaged or destroyed structures or technology. ",
                     "It's a %TMP and clear, sunny week, %WND. An unusual heat wave has set in across the colony. Keep hydrated @Colonists and stay cool!"
-            /*},
-            {
-
-            }*/
     };
 
     private static final String[] naturalTemps = {
@@ -61,8 +46,16 @@ public class dataNaturalStrings {
 
     private static final String[] colonyList = {
             "Siren-3",
-            "Test Colony"
+            "New Colony"
     };
+
+    private static final String[] seasonList = {
+            "[ERROR: Dummy data]",
+            "dry Season",
+            "wet season"
+    };
+
+    public static String getSeason(Integer index) {return seasonList[index];}
 
     public static String getWeather(Integer index) {
         return naturalWeather[index];

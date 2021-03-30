@@ -17,11 +17,13 @@ import org.quartz.impl.StdSchedulerFactory;
 import javax.security.auth.login.LoginException;
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Calendar;
 
-import static com.zombieturtle.forecazt.dataManager.dataMsgBuilder.msgBuilder;
-import static com.zombieturtle.forecazt.dataManager.dataUpdater.updateData;
+import static com.zombieturtle.forecazt.dataManager.dataUpdSiren3.updateData;
 
 public class ForecaZT extends ListenerAdapter {
 
@@ -30,14 +32,11 @@ public class ForecaZT extends ListenerAdapter {
 
     // Bot specific vars
     public static String botWeather;
-    // public static String botCalendar; Deprecated, likely removing
     public static String botToken;
     public static String botControl;
+    public static String botGM;
     public static Integer startTime; // the 0-based time the bot is starting at, passed in via args[3]
     public static Integer currentTime;
-    public static Integer hour, minute, second;
-
-    public static ArrayList<dataDay> thisWeek = new ArrayList<dataDay>();
 
     public static JDA jda;
     public static Scheduler scheduler;
@@ -46,22 +45,24 @@ public class ForecaZT extends ListenerAdapter {
     public static void main(String[] args)
             throws LoginException, SchedulerException, InterruptedException, JAXBException, FileNotFoundException {
 
-        if (args.length < 4) {
-            System.out.println("You have to provide the [Token] [WeatherChannelId] [ControlChannelId] [StartTime] [Hour] [Minute] [Second]");
+        if (args.length < 5) {
+            System.out.println("You have to provide the [Token] [WeatherChannelId] [ControlChannelId] [GMChannelId] [StartTime]");
             System.exit(1);
         }
+
+        // args[0] Discord bot token
+        // args[1] Channel Id for weather output
+        // args[2] Channel Id for Admin Log output
+        // args[3] Channel Id for GM weather preview output
+        // args[4] Starting dayweek
+
         botToken = args[0];
         botWeather = args[1];
-        // botCalendar = args[2]; Deprecated, likely removing
         botControl = args[2];
-        startTime = Integer.parseInt(args[3]);
+        botGM = args[3];
+        startTime = Integer.parseInt(args[4]);
         currentTime = startTime;
 
-        hour = Integer.parseInt(args[4]);
-        minute = Integer.parseInt(args[5]);
-        second = Integer.parseInt(args[6]);
-
-        // args[0] should be the token
         // We only need 2 intents in this bot. We only respond to messages in guilds and private channels.
         // All other events will be disabled.
         jda = JDABuilder.createLight(args[0], GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES)
@@ -70,49 +71,51 @@ public class ForecaZT extends ListenerAdapter {
                 .build()
                 .awaitReady();
 
-        Date startHMS = DateBuilder.todayAt(hour, minute, second);
-
-        // Remove this after commented logic is finished
         updateData();
-
-        /*
-        if(startTime == 0) {
-            updateData();
-        } else if(startTime >= 1 && startTime <= 7){
-
-        }
-        */
-
 
         StdSchedulerFactory factory = new StdSchedulerFactory();
         Scheduler scheduler = factory.getScheduler();
 
         JobDetail jobDetail = JobBuilder.newJob(jobPostWeek.class).withIdentity("jobPostWeek", "group1").build();
+        JobDetail genDetail = JobBuilder.newJob(jobGenWeek.class).withIdentity("jobGenWeek", "group2").build();
 
-        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("myTrigger", "group1")
+        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("postDay", "group1")
                 .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule(second + " " + minute + " " + hour + " * * ?"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 5 0 ? * FRI"))
+                .build();
+
+        Trigger trigger2 = TriggerBuilder.newTrigger().withIdentity("genWeek", "group2")
+                .startNow()
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 ? * FRI"))
                 .build();
 
         scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.scheduleJob(genDetail, trigger2);
         scheduler.start();
 
-        MessageChannel control = jda.getTextChannelById(botControl); //jda.getTextChannelsByName(botWeather, true).get(0);
-        control.sendMessage("Starting day: " + currentTime.toString() + nl + "First fire: " + startHMS.toString()).queue();
-        String msg = "[ERROR: No weather data!]";
-
-        for(int i = 0; i < 7; i++) {
-            try {
-                msg = msgBuilder(i);
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(msg + nl + nl);
+        String gen;
+        if (isGen()) {
+            gen = "Yes";
+        } else {
+            gen = "No";
         }
-
-
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        MessageChannel control = jda.getTextChannelById(botControl);
+        control.sendMessage("Starting dayweek: " + currentTime.toString() + " initiated on " + new SimpleDateFormat("EEEE MM DD YYYY", Locale.ENGLISH).format(date.getTime())  + nl + nl + "postWeek:" + nl + "First fire: " + trigger.getStartTime().toString() + nl + nl + "genWeek:" + nl + "First fire: " + trigger2.getStartTime().toString() + nl + nl + "Create data on fire?: " + gen);
     }
+
+    public static Boolean isGen() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        Boolean gen = false;
+        if (new SimpleDateFormat("EE", Locale.ENGLISH).format(date.getTime()) == "Sun") {
+           gen = true;
+        }
+        return gen;
+    }
+
+    // IT#0015 start -----
 
     private void shutdown(boolean now) throws SchedulerException, InterruptedException {
         MessageChannel control = jda.getTextChannelById(botControl);
@@ -151,6 +154,8 @@ public class ForecaZT extends ListenerAdapter {
                     break;
             }
         }
+
+        //IT#0015 End -----
     }
 }
 

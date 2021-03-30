@@ -1,9 +1,9 @@
 package com.zombieturtle.forecazt.dataManager;
 
+import static com.zombieturtle.forecazt.ForecaZT.currentTime;
 import static com.zombieturtle.forecazt.dataManager.dataNaturalStrings.*;
 import static com.zombieturtle.forecazt.dataManager.dataWorkers.*;
 import static com.zombieturtle.forecazt.ForecaZT.nl;
-import static com.zombieturtle.forecazt.ForecaZT.*;
 
 import javax.xml.bind.JAXBException;
 
@@ -33,17 +33,20 @@ public class dataMsgBuilder {
     public static String msgBuilder(Integer current) throws JAXBException {
         dataDay dataHolder = loadDay(current);
 
-        String message = "%WND %TMP";
-
-
+        String message = "[ERROR: Failure constructing message]";
+        Integer sweek;
+        //if(currentTime >= 26)
 
         if(dataHolder.getBad()) {
-            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + getBadStuff(dataHolder.getWeather());
+            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + "---" + nl + nl + "Here's the weather for the %YRth week of the year, the %WKth week of the %SEASON." + nl + nl + getBadStuff(dataHolder.getWeather());
         } else if(!dataHolder.getBad()) {
-            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + getWeather(dataHolder.getWeather());
+            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + "---" + nl + nl + "Here's the weather for the %YRth week of the year, the %WKth week of the %SEASON." + nl + nl + getWeather(dataHolder.getWeather());
         }
-        message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())));
-        message = message.replace("%TMP", getNaturalTemps(dataHolder.getNatTemp()));
+        message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())))
+                .replace("%TMP", getNaturalTemps(dataHolder.getNatTemp()))
+                .replace("%YR", currentTime.toString())
+                .replace("%WK", sweek.toString())
+                .replace("%SEASON", getSeason(dataHolder.getSeason()));
         return message;
     }
 
