@@ -37,7 +37,7 @@ public class ForecaZT extends ListenerAdapter {
     public static String botGM;
     public static Integer startTime; // the 0-based time the bot is starting at, passed in via args[3]
     public static Integer currentTime;
-
+    public static Integer totalYears = 0;
     public static JDA jda;
     public static Scheduler scheduler;
 
@@ -71,6 +71,13 @@ public class ForecaZT extends ListenerAdapter {
                 .build()
                 .awaitReady();
 
+        while(currentTime > 365) {
+            totalYears ++;
+            currentTime = currentTime - 365;
+        }
+        // test
+        System.out.println(totalYears + " Years" + nl + currentTime + " day in year");
+        // end test
         updateData();
 
         StdSchedulerFactory factory = new StdSchedulerFactory();

@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdNewColony.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/jobGenWeek.java" afterDir="false" />
+    <list default="true" id="014ed1bd-764e-4cc0-86b9-b61bee323ad2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataNaturalStrings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataNaturalStrings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,38 +56,16 @@
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--follow-tags" />
-        <option name="title" value="Current Branch" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="0.1-testing" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="ProjectId" id="1pXuXMGfKyWteCbwmYOC7vNLUnV" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectId" id="1qTa7nx7zN7HWbSVKkt9YziEHfT" />
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -96,17 +76,6 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build/libs" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\aubur\IdeaProjects\forecazt\build\libs" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="forecazt [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -139,20 +108,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="" />
-      <created>1615341795906</created>
+      <changelist id="014ed1bd-764e-4cc0-86b9-b61bee323ad2" name="Default Changelist" comment="" />
+      <created>1617105875214</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1615341795906</updated>
+      <updated>1617105875214</updated>
     </task>
-    <task id="LOCAL-00001" summary="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed.">
-      <created>1616464012078</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1616464012078</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,7 +129,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="All issues prior to IT#0022 (excluding IT#0003 and IT#0015) and tests TEST#0001, TEST#0002 completed." />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
