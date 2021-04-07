@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="014ed1bd-764e-4cc0-86b9-b61bee323ad2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    <list default="true" id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/LootTurtle.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/LootTurtle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,13 +56,13 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="0.1-testing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qTa7nx7zN7HWbSVKkt9YziEHfT" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -108,7 +105,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="014ed1bd-764e-4cc0-86b9-b61bee323ad2" name="Default Changelist" comment="" />
+      <changelist id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="" />
       <created>1617105875214</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

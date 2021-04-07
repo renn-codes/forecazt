@@ -23,21 +23,23 @@ public class dataUpdSiren3 {
 
     public static void updateData() throws JAXBException, FileNotFoundException {
         MessageChannel control = jda.getTextChannelById(botControl);
-        if (startTime == 0) {
+        if (startTime == 1) {
             generateWeek(true);
-        } else if(startTime >= 1) {
+        } else if(startTime >= 2) {
             generateWeek(false);
+        } else if(startTime == 0) {
+            control.sendMessage("[ERROR] Cannot start on day 0. Kill this instance of the bot, and check your start statement's starting dayweek.").queue();
         }
-        Integer begin = currentTime + 1;
-        Integer end = currentTime + 7;
-        control.sendMessage("Dayweek XML generation completed for weeks " + begin.toString() + " though " + end.toString());
+        Integer begin = startTime + 1;
+        Integer end = startTime + 7;
+        control.sendMessage("Dayweek XML generation completed for weeks " + begin.toString() + " though " + end.toString()).queue();
     }
 
     private static void generateWeek(boolean firstRun) throws JAXBException, FileNotFoundException {
         if(!firstRun) {
-            w = currentTime + 1; // get prev dayweek/runtime
+            w = startTime + 1; // get prev dayweek/runtime
         } else if(firstRun) {
-            w = 0;
+            w = 1;
         }
         String d = getSysDate(); //get today's date
         MessageChannel gm = jda.getTextChannelById(botGM);
@@ -45,7 +47,7 @@ public class dataUpdSiren3 {
         gm.sendMessage("Weekly weather preview" + nl + "---");
         for (int i = 1; i <= 7; i++) {
             dataHolder.setColony(0);
-            genSeason(w);
+            genSeason(currentTime);
             genWeather();
             genNatTemp();
             dataHolder.setRuntime(w);
@@ -53,8 +55,8 @@ public class dataUpdSiren3 {
             saveDay(dataHolder, w);
             Calendar cal = Calendar.getInstance();
             Date day = cal.getTime();
-            gm.sendMessage("**" + new SimpleDateFormat("M d yyyy", Locale.ENGLISH).format(day.getTime()) + "**" + nl + "---");
-            gm.sendMessage(msgBuilder(w));
+            //gm.sendMessage("**" + new SimpleDateFormat("M d yyyy", Locale.ENGLISH).format(day.getTime()) + "**" + nl + "---").queue();
+            //gm.sendMessage(msgBuilder(w)).queue();
             w = w + 1;
         }
     }

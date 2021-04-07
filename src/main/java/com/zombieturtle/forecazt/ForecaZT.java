@@ -37,7 +37,7 @@ public class ForecaZT extends ListenerAdapter {
     public static String botGM;
     public static Integer startTime; // the 0-based time the bot is starting at, passed in via args[3]
     public static Integer currentTime;
-    public static Integer totalYears = 0;
+    public static Integer totalYears = 2;  // starting on year 2, change to be whatever you need
     public static JDA jda;
     public static Scheduler scheduler;
 
@@ -75,10 +75,10 @@ public class ForecaZT extends ListenerAdapter {
             totalYears ++;
             currentTime = currentTime - 365;
         }
-        // test
-        System.out.println(totalYears + " Years" + nl + currentTime + " day in year");
-        // end test
-        updateData();
+
+        if(isGen()) {
+            updateData();
+        }
 
         StdSchedulerFactory factory = new StdSchedulerFactory();
         Scheduler scheduler = factory.getScheduler();
@@ -88,12 +88,12 @@ public class ForecaZT extends ListenerAdapter {
 
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity("postDay", "group1")
                 .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 5 0 ? * FRI"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 * * ?"))
                 .build();
 
         Trigger trigger2 = TriggerBuilder.newTrigger().withIdentity("genWeek", "group2")
                 .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 ? * FRI"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 5 0 ? * MON"))
                 .build();
 
         scheduler.scheduleJob(jobDetail, trigger);
@@ -109,7 +109,7 @@ public class ForecaZT extends ListenerAdapter {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         MessageChannel control = jda.getTextChannelById(botControl);
-        control.sendMessage("Starting dayweek: " + currentTime.toString() + " initiated on " + new SimpleDateFormat("EEEE MM DD YYYY", Locale.ENGLISH).format(date.getTime())  + nl + nl + "postWeek:" + nl + "First fire: " + trigger.getStartTime().toString() + nl + nl + "genWeek:" + nl + "First fire: " + trigger2.getStartTime().toString() + nl + nl + "Create data on fire?: " + gen);
+        control.sendMessage("Starting dayweek: " + startTime.toString() + " initiated on " + new SimpleDateFormat("EEEE MM dd YYYY", Locale.ENGLISH).format(date.getTime())  + nl + nl + "postWeek:" + nl + "First fire: " + trigger.getNextFireTime().toString() + nl + nl + "genWeek:" + nl + "First fire: " + trigger2.getNextFireTime().toString() + nl + nl + "Create data on fire?: " + gen).queue();
     }
 
     public static Boolean isGen() {
