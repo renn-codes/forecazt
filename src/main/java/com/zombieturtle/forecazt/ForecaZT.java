@@ -71,9 +71,9 @@ public class ForecaZT extends ListenerAdapter {
                 .build()
                 .awaitReady();
 
-        while(currentTime > 365) {
+        while(currentTime > 52) {
             totalYears ++;
-            currentTime = currentTime - 365;
+            currentTime = currentTime - 52;
         }
 
         if(isGen()) {
@@ -88,12 +88,12 @@ public class ForecaZT extends ListenerAdapter {
 
         Trigger trigger = TriggerBuilder.newTrigger().withIdentity("postDay", "group1")
                 .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0 * * ?"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 0 4 * * ?"))
                 .build();
 
         Trigger trigger2 = TriggerBuilder.newTrigger().withIdentity("genWeek", "group2")
                 .startNow()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 5 0 ? * MON"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 5 4 ? * MON"))
                 .build();
 
         scheduler.scheduleJob(jobDetail, trigger);
@@ -109,7 +109,7 @@ public class ForecaZT extends ListenerAdapter {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         MessageChannel control = jda.getTextChannelById(botControl);
-        control.sendMessage("Starting dayweek: " + startTime.toString() + " initiated on " + new SimpleDateFormat("EEEE MM dd YYYY", Locale.ENGLISH).format(date.getTime())  + nl + nl + "postWeek:" + nl + "First fire: " + trigger.getNextFireTime().toString() + nl + nl + "genWeek:" + nl + "First fire: " + trigger2.getNextFireTime().toString() + nl + nl + "Create data on fire?: " + gen).queue();
+        control.sendMessage("Initiated on " + new SimpleDateFormat("EEEE MM dd YYYY", Locale.ENGLISH).format(date.getTime())  + nl + nl + "Starting dayweek: " + startTime.toString() + nl + nl + "postWeek:" + nl + "First fire: " + trigger.getNextFireTime().toString() + nl + nl + "genWeek:" + nl + "First fire: " + trigger2.getNextFireTime().toString() + nl + nl + "Create data on fire?: " + gen).queue();
     }
 
     public static Boolean isGen() {

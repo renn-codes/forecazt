@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="b1fe7cbe-0b4e-4d7a-80d7-70a862fa1752" name="Default Changelist" comment="Created IT#0032, IT#0033, IT#0034, IT#0035, IT#0036, IT#0037. Completed IT#0031, IT#0032, IT#0035, IT#0036, TEST#0003. Compiled and deployed REL#001. Removed LootTurtle.java reference file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/zombieturtle/forecazt/LootTurtle.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/ForecaZT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/LootTurtle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataUpdSiren3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zombieturtle/forecazt/dataManager/dataMsgBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +51,15 @@
     </system>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="0.1-testing" />
+        <entry key="$PROJECT_DIR$" value="prerelease-0.02a" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,6 +114,14 @@
       <option name="presentableId" value="Default" />
       <updated>1617105875214</updated>
     </task>
+    <task id="LOCAL-00001" summary="Created IT#0032, IT#0033, IT#0034, IT#0035, IT#0036, IT#0037. Completed IT#0031, IT#0032, IT#0035, IT#0036, TEST#0003. Compiled and deployed REL#001. Removed LootTurtle.java reference file.">
+      <created>1617761354467</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1617761354468</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,5 +138,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Created IT#0032, IT#0033, IT#0034, IT#0035, IT#0036, IT#0037. Completed IT#0031, IT#0032, IT#0035, IT#0036, TEST#0003. Compiled and deployed REL#001." />
+    <MESSAGE value="Created IT#0032, IT#0033, IT#0034, IT#0035, IT#0036, IT#0037. Completed IT#0031, IT#0032, IT#0035, IT#0036, TEST#0003. Compiled and deployed REL#001. Removed LootTurtle.java reference file." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created IT#0032, IT#0033, IT#0034, IT#0035, IT#0036, IT#0037. Completed IT#0031, IT#0032, IT#0035, IT#0036, TEST#0003. Compiled and deployed REL#001. Removed LootTurtle.java reference file." />
   </component>
 </project>

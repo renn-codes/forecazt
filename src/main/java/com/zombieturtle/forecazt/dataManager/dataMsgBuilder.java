@@ -43,7 +43,7 @@ public class dataMsgBuilder {
         if(dataHolder.getBad()) {
             message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + "---" + nl + nl + "Here's the weather for the %YRth week of the year, the %WKth week of the %SEASON." + nl + nl + getBadStuff(dataHolder.getWeather());
         } else if(!dataHolder.getBad()) {
-            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + "---" + nl + nl + "Here's the weather week %WK of year %YR. It is day %SW of the %SEASON." + nl + nl + getWeather(dataHolder.getWeather());
+            message = "*Today's weather report for **" + getColonyList(dataHolder.getColony()) + "** comes through over the Infosphere.* " + nl + nl + "---" + nl + nl + "Here's the weather week %WK of year %YR. It is week %SW of the %SEASON." + nl + nl + getWeather(dataHolder.getWeather());
         }
         message = message.replace("%WND", getBeaufortScale(ZTScale(dataHolder.getWindMph())))
                 .replace("%TMP", getNaturalTemps(dataHolder.getNatTemp()))
